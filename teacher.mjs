@@ -12,6 +12,18 @@ class Teachers{
         ||  !Date.parse(data.dateOfBirth)){
             throw new TypeError("");
         }
+        if(!data.hasOwnProperty("phones")){
+            throw new Error('');
+        }else{
+            data.phones.forEach(phones => {
+                if(!phones.phone || typeof phones.phone !== 'string'){
+                    throw new TypeError("");
+                }
+                if(!phones.primary || typeof phones.primary !== 'boolean'){
+                    throw new TypeError("");
+                }
+            });
+        }
         if(!data.hasOwnProperty("emails")){
             throw new Error('');
         }else{
