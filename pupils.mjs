@@ -1,4 +1,4 @@
-class Pupils{
+export class Pupils{
     #counter = 0;
     #pupils = new Map();
     #validatePupil(data){
@@ -60,22 +60,3 @@ class Pupils{
     }
 }
 
-const pupil_1 = {
-    "name": {
-      "first": "Lana",
-      "last": "LanaGvari"
-    },
-    "dateOfBirth": "02/02/2002", // format date
-    "phones": [
-      {
-        "phone": "568 20 20 20",
-        "primary": true
-      }
-    ],
-    "sex": "Female", // male OR female
-    "description": ""
-  }
-
-const pupils = new Pupils();
-const pupil = pupils.add(pupil_1);
-console.log(pupils.read(pupil));

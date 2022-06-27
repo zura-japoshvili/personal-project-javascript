@@ -1,6 +1,7 @@
-class Subject {
+export class Subject {
+    #subjectId;
     #validateSub(subject){
-        if(subject.length < 2 || subject.length > 3){
+        if(Object.keys(subject).length < 2 || Object.keys(subject).length > 3){
             throw new Error('1');
         }
         if(!subject.hasOwnProperty("title") || typeof subject.title !== 'string'){
@@ -16,40 +17,37 @@ class Subject {
     constructor(subject){
         this.#validateSub(subject);
         const id = String(Math.floor(Math.random() * 100000));
+        this.#subjectId = id;
         return {id, ...subject};
     }
+    id(){
+        return this.#subjectId;
+    }
 }
-const history = new Subject({
-    title: 'History',
-    lessons: 24
-});
-class LMS {
+export class LMS {
     #lms = new Map();
     add(data){
-        this.#lms.set(data);
+        this.#lms.set(data.id, data);
     }
     remove(data){
-        if(!this.#lms.has(data)){
+        if(!this.#lms.has(data.id)){
             throw new Error('')
         }
-        this.#lms.delete(data);
+        this.#lms.delete(data.id);
     }
     verify(data){
-        if(!this.#lms.has(data)){
+        if(!this.#lms.has(data.id)){
             return false;
         }
         return true;
     }
     readAll(){
         if(arguments.length) throw new Error('argument was passed');
-        console.log(this.#lms);
-        // return [...this.#lms.values()];
+        return [...this.#lms.values()];
     }
 }
-const lms = new LMS();
-lms.add(history);
-console.log(lms.verify(history));
-lms.readAll();
+
+
 
 
 

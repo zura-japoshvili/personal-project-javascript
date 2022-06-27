@@ -1,4 +1,4 @@
-class Teachers{
+export class Teachers{
     #counter = 0;
     #teacher = new Map();
     #validateTeacher(data){
@@ -82,35 +82,3 @@ class Teachers{
     }
 }
 
-
-const teacher1 = {
-    "name": {
-        "first": "Nana",
-        "last": "Gvarishvili"
-    },
-    "dateOfBirth": "02/02/1991", // format date
-    "emails": [
-        {
-        "email": "nanaGvar@gmail.com",
-        "primary": true
-        }
-    ],
-    "phones": [
-        {
-        "phone": "568-68-68-68",
-        "primary": true
-        }
-    ],
-    "sex": "Female", // male or female
-    "subjects": [
-        {
-        "subject": "History" // just name property of subject.
-        }
-    ],
-    // "description": "",
-}
-const teachers = new Teachers();
-const teacherId = teachers.add(teacher1);
-
-
-console.log(teachers.read(teacherId));
