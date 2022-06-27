@@ -3,6 +3,7 @@ import { LMS } from "./lms.mjs";
 import { Pupils } from "./pupils.mjs";
 import { Teachers } from "./teacher.mjs";
 import { Groups } from "./groups.mjs";
+import { GradeBooks } from "./gradebooks.mjs";
 
 const history = new Subject({
     title: 'History',
@@ -58,21 +59,19 @@ console.log(lms.readAll());
 
 const pupils = new Pupils();
 const pupil = pupils.add(pupil_1);
-console.log(pupils.read(pupil));
 
 const teachers = new Teachers();
 const teacherId = teachers.add(teacher1);
 
 const groups = new Groups();
 const groupID = groups.add(224);
-groups.addPupil(groupID, {id: 1,name:'zaza'});
-const groupIz = groups.add(224);
-groups.addPupil(groupIz, {id: 2,name:'zyza'});
-const groupIx = groups.add(224);
-groups.addPupil(groupIx, {id: 3,name:'zeza'});
-groups.removePupil(groupID, 2);
+groups.addPupil(groupID, pupils.read('0'));
+groups.addPupil(groupID, pupils.read('0'));
 groups.update('0', {
     room: 237
   });
 console.log(groups.readAll());
+
+const gradebooks = new GradeBooks(groups.readAll(), teachers.readAll(), lms.readAll());
+
 

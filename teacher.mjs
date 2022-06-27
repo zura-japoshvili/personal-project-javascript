@@ -80,5 +80,9 @@ export class Teachers{
         }
         this.#teacher.delete(id);
     }
+    readAll(){
+        if(arguments.length) throw new Error('argument was passed');
+        return [...this.#teacher.values()];
+    }
 }
 
