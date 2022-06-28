@@ -20,11 +20,18 @@ export class Teachers{
             throw new Error('');
         }else{
             data.phones.forEach(phones => {
+                let count = 0;
                 if(!phones.phone || typeof phones.phone !== 'string'){
                     throw new TypeError("");
                 }
                 if(!phones.primary || typeof phones.primary !== 'boolean'){
                     throw new TypeError("");
+                }
+                if(phones.primary === true){
+                    count++;
+                }
+                if(count > 1){
+                    throw new Error("");
                 }
             });
         }
@@ -32,11 +39,18 @@ export class Teachers{
             throw new Error('');
         }else{
             data.emails.forEach(emails => {
+                let count = 0;
                 if(!emails.email || typeof emails.email !== 'string'){
                     throw new TypeError("");
                 }
                 if(!emails.primary || typeof emails.primary !== 'boolean'){
                     throw new TypeError("");
+                }
+                if(emails.primary === true){
+                    count++;
+                }
+                if(emails > 1){
+                    throw new Error("");
                 }
             });
         }
