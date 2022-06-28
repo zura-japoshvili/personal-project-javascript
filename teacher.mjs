@@ -2,11 +2,15 @@ export class Teachers{
     #counter = 0;
     #teacher = new Map();
     #validateTeacher(data){
-        if(!data.name.hasOwnProperty("first") || typeof data.name.first !== "string"){
-            throw new TypeError("");
-        }
-        if(!data.name.hasOwnProperty("last") || typeof data.name.last !== "string"){
-            throw new TypeError("");
+        if(!data.hasOwnProperty("name")){
+            throw new Error("");
+        }else{
+            if(!data.name.hasOwnProperty("first") || typeof data.name.first !== "string"){
+                throw new TypeError("");
+            }
+            if(!data.name.hasOwnProperty("last") || typeof data.name.last !== "string"){
+                throw new TypeError("");
+            }
         }
         if(!data.hasOwnProperty("dateOfBirth") || typeof data.dateOfBirth !== "string" 
         ||  !Date.parse(data.dateOfBirth)){

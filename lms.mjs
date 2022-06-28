@@ -26,7 +26,24 @@ export class Subject {
 }
 export class LMS {
     #lms = new Map();
+
+    #validateSub(subject){
+        if(Object.keys(subject).length < 2 || Object.keys(subject).length > 3){
+            throw new Error('1');
+        }
+        if(!subject.hasOwnProperty("title") || typeof subject.title !== 'string'){
+            throw new Error("2");
+        }
+        if(!subject.hasOwnProperty("lessons") || typeof subject.lessons !== 'number'){
+            throw new Error("3");
+        }
+        if(subject.hasOwnProperty("description") && typeof subject.description !== 'string'){
+            throw new Error("4");
+        }
+    }
+
     add(data){
+        this.#validateSub(data)
         this.#lms.set(data.id, data);
     }
     remove(data){

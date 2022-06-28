@@ -2,11 +2,15 @@ export class Pupils{
     #counter = 0;
     #pupils = new Map();
     #validatePupil(data){
-        if(!data.name.hasOwnProperty("first") || typeof data.name.first !== "string"){
-            throw new TypeError("");
-        }
-        if(!data.name.hasOwnProperty("last") || typeof data.name.last !== "string"){
-            throw new TypeError("");
+        if(!data.hasOwnProperty("name")){
+            throw new Error("");
+        }else{
+            if(!data.name.hasOwnProperty("first") || typeof data.name.first !== "string"){
+                throw new TypeError("");
+            }
+            if(!data.name.hasOwnProperty("last") || typeof data.name.last !== "string"){
+                throw new TypeError("");
+            }
         }
         if(!data.hasOwnProperty("dateOfBirth") || typeof data.dateOfBirth !== "string" 
         ||  !Date.parse(data.dateOfBirth)){
