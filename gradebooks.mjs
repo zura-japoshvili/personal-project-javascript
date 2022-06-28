@@ -4,15 +4,7 @@ export class GradeBooks {
         this.groups = groups;
         this.teachers = teachers;
         this.lms = lms;
-
     }
-    // const record = {
-    //     pupilId: pupilId,
-    //     teacherId: teacherId,
-    //     subjectId: history.id,
-    //     lesson: 1,
-    //     mark: 9
-    //   };
     #validateRecord(record){
         if(Object.keys(record).length !== 5){
             throw new Error("");
@@ -29,7 +21,7 @@ export class GradeBooks {
         if(!record.hasOwnProperty('lesson')){
             throw new Error('');
         }
-        if(!record.hasOwnProperty('mark')){
+        if(!record.hasOwnProperty('mark')|| record.mark < 1 || record.mark > 10){
             throw new Error('');
         }
     }
@@ -41,10 +33,75 @@ export class GradeBooks {
             }
         });
         if(!checker) throw new Error("");
-        this.#gradebook.set(groupId, {});
-        return id;
+        this.#gradebook.set(groupId, []);
+        return groupId;
     }
-    addRecord(record){
+    addRecord(gradeBookId, record){
+        this.#validateRecord(record);
+        if(!this.#gradebook.has(gradeBookId)){
+            throw new Error('');
+        }
+        let data = this.#gradebook.get(gradeBookId);
+        data.push(record);
+    }
 
+    #getRecord(data){
+        let teacherName = this.teachers[data.teacherId].name.first + " " + this.teachers[data.teacherId].name.last;
+        let subjectName = '';
+        this.lms.forEach(value => {
+            if(value.id === data.subjectId){
+                subjectName = value.title;
+            }
+        })
+        return {
+            teacher: teacherName,
+            subject: subjectName,
+            lesson: data.lesson,
+            mark: data.mark
+        }
+    }
+    #getName(data){
+        let pupilName = '';
+        this.groups.forEach(value => {
+            value.pupils.forEach(pupil => {
+                if(data.pupilId === pupil.id && !pupilName){
+                    pupilName = `${pupil.name.first} ${pupil.name.last}`;
+                }
+            })
+        })
+        return pupilName;
+    }
+
+    read(gradeBookId, pupilId){
+        if(!this.#gradebook.has(gradeBookId)){
+            throw new Error('');
+        }
+        const data = this.#gradebook.get(gradeBookId);
+        let pupilName = '';
+
+        let pupilArr = [];
+        data.forEach(value => {
+            if(value.pupilId === pupilId){
+                pupilArr.push(this.#getRecord(value));
+            }
+            if(!pupilName){
+                pupilName = this.#getName(value);
+            }
+        })
+        return {
+            name: pupilName,
+            record: pupilArr
+        }
+    }
+    readAll(gradeBookId){
+        if(!this.#gradebook.has(gradeBookId)){
+            throw new Error('');
+        }
+        const data = this.#gradebook.get(gradeBookId);
+
+        return [...data];
+    }
+    clear(){
+        this.#gradebook.clear();
     }
 }
