@@ -4,20 +4,15 @@ export class Pupils {
         this.pupils = new Map();
     }
     validatePupil(data) {
-        if (!data.hasOwnProperty("name")) {
-            throw new Error("");
+        if (!data.hasOwnProperty("dateOfBirth")) {
+            throw new TypeError("");
         }
         else {
-            if (!data.name.hasOwnProperty("first")) {
-                throw new TypeError("");
+            let date_regex = /^([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2})$/;
+            date_regex.test(data.dateOfBirth);
+            if (!date_regex) {
+                throw new Error('');
             }
-            if (!data.name.hasOwnProperty("last")) {
-                throw new TypeError("");
-            }
-        }
-        if (!data.hasOwnProperty("dateOfBirth")
-            || !Date.parse(data.dateOfBirth)) {
-            throw new TypeError("");
         }
         if (!data.hasOwnProperty("phones")) {
             throw new Error('');
@@ -25,12 +20,6 @@ export class Pupils {
         else {
             data.phones.forEach(phones => {
                 let count = 0;
-                if (!phones.phone || typeof phones.phone !== 'string') {
-                    throw new TypeError("");
-                }
-                if (!phones.primary || typeof phones.primary !== 'boolean') {
-                    throw new TypeError("");
-                }
                 if (phones.primary === true) {
                     count++;
                 }
@@ -38,12 +27,6 @@ export class Pupils {
                     throw new Error("");
                 }
             });
-        }
-        if (!data.hasOwnProperty('sex') || typeof data.sex !== 'string') {
-            throw new TypeError('');
-        }
-        if (data.hasOwnProperty("description") && typeof data.description !== 'string') {
-            throw new TypeError("");
         }
     }
     add(pupil) {
@@ -54,7 +37,7 @@ export class Pupils {
     }
     read(id) {
         const foundPupil = this.pupils.get(id);
-        return foundPupil ? Object.assign(Object.assign({}, foundPupil), { id }) : null;
+        return foundPupil ? Object.assign({ id }, foundPupil) : null;
     }
     update(id, updatePupil) {
         this.validatePupil(updatePupil);
@@ -101,4 +84,5 @@ const pupil_2 = {
 };
 const pupils = new Pupils();
 const pupil1 = pupils.add(pupil_1);
+console.log(pupils.read('0'));
 const pupil2 = pupils.add(pupil_2);

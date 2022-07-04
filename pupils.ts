@@ -4,44 +4,32 @@ interface pupilVal{
         last: string
     }
     dateOfBirth: string,
-    phones: [
+    phones: 
         {
             phone: string,
             primary: boolean
-        }
-    ],
+        }[],
     sex: string,
-    description: string
+    description?: string
 }
 export class Pupils{
     private counter: number = 0;
     private pupils = new Map();
-    private validatePupil(data){
-        if(!data.hasOwnProperty("name")){
-            throw new Error("");
-        }else{
-            if(!data.name.hasOwnProperty("first")){
-                throw new TypeError("");
-            }
-            if(!data.name.hasOwnProperty("last")){
-                throw new TypeError("");
-            }
-        }
-        if(!data.hasOwnProperty("dateOfBirth") 
-        ||  !Date.parse(data.dateOfBirth)){
+    private validatePupil(data:pupilVal){
+        if(!data.hasOwnProperty("dateOfBirth")){
             throw new TypeError("");
+        }else{
+            let date_regex = /^([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2})$/;
+            date_regex.test(data.dateOfBirth);
+            if(!date_regex){
+                throw new Error('');
+            }
         }
         if(!data.hasOwnProperty("phones")){
             throw new Error('');
         }else{
             data.phones.forEach(phones => {
                 let count = 0;
-                if(!phones.phone){
-                    throw new TypeError("");
-                }
-                if(!phones.primary){
-                    throw new TypeError("");
-                }
                 if(phones.primary === true){
                     count++;
                 }
@@ -50,26 +38,20 @@ export class Pupils{
                 }
             });
         }
-        if(!data.hasOwnProperty('sex')){
-            throw new TypeError('');
-        }
-        if(data.hasOwnProperty("description")){
-            throw new TypeError("");
-        }
     }
-    add(pupil:object){
+    public add(pupil: pupilVal): object{
         this.validatePupil(pupil);
         const id = String(this.counter++);
         this.pupils.set(id, pupil);
         return {id, pupil};
     }
 
-    read(id:string){
+    public read(id:string){
         const foundPupil = this.pupils.get(id);
-        return foundPupil ? {...foundPupil, id} : null;
+        return foundPupil ? {id, ...foundPupil} : null;
     }
-    update(id: string, updatePupil:object){
-        this.validatePupil(updatePupil as pupilVal);
+    public update(id: string, updatePupil: pupilVal): void{
+        this.validatePupil(updatePupil);
         const foundPupil = this.read(id);
         delete foundPupil.id;
         this.pupils.set(id, {
@@ -77,7 +59,7 @@ export class Pupils{
             ...updatePupil
         });
     }
-    remove(id:string){
+    public remove(id:string): void{
         if(!this.pupils.has(id)){
             throw new Error('')
         }
@@ -118,6 +100,7 @@ const pupil_1 = {
 
 
 const pupils = new Pupils();
-const pupil1 = pupils.add(pupil_1 as pupilVal);
-pupils.read('1');
-const pupil2 = pupils.add(pupil_2 as pupilVal);
+const pupil1 = pupils.add(pupil_1);
+console.log(pupils.read('0'));
+
+const pupil2 = pupils.add(pupil_2);

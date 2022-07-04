@@ -1,4 +1,5 @@
 export class GradeBooks {
+    #counter = 0;
     #gradebook = new Map();
     constructor(groups, teachers, lms){
         this.groups = groups;
@@ -33,8 +34,9 @@ export class GradeBooks {
             }
         });
         if(!checker) throw new Error("");
-        this.#gradebook.set(groupId, []);
-        return groupId;
+        const id = String(this.counter++);
+        this.#gradebook.set(id, []);
+        return id;
     }
     addRecord(gradeBookId, record){
         this.#validateRecord(record);

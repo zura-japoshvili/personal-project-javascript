@@ -1,9 +1,12 @@
-import { Subject } from "./lms.mjs";
-import { LMS } from "./lms.mjs";
-import { Pupils } from "./pupils.mjs";
-import { Teachers } from "./teacher.mjs";
-import { Groups } from "./groups.mjs";
+import { Subject } from "./lms.js";
+import { LMS } from "./lms.js";
+import { Pupils } from "./pupils.js";
+import { Teachers } from "./teacher.js";
+import { Groups } from "./groups.js";
 import { GradeBooks } from "./gradebooks.mjs";
+
+
+
 
 const history = new Subject({
     title: 'History',
