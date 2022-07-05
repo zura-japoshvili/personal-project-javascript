@@ -1,4 +1,10 @@
 "use strict";
+// interface SubjectInt{
+//     id?: string,
+//     title: string,
+//     lessons: number,
+//     description?: string,
+// }
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LMS = exports.Subject = void 0;
 class Subject {
@@ -49,4 +55,4 @@ const history = new Subject({
 });
 console.log(history);
 const lms = new LMS();
-// lms.add(history);
+lms.add(history);

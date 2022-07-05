@@ -62,18 +62,6 @@ export class Teachers{
                 }
             });
         }
-        if(!data.hasOwnProperty('subjects')){
-            throw new Error('');
-        }else{
-            data.subjects.forEach(subjects => {
-                if(typeof subjects.subject !== 'string'){
-                    throw new TypeError('');
-                }
-            });
-        }
-        if(data.hasOwnProperty("description") && typeof data.description !== 'string'){
-            throw new TypeError("");
-        }
     }
     add(teacher: TeachersInt): string{
         this.validateTeacher(teacher);
@@ -83,7 +71,6 @@ export class Teachers{
     }
 
     read(id:string){
-        if(typeof id !== 'string') throw new Error('not a string')
         const foundTeacher = this.teacher.get(id);
         return foundTeacher ? {...foundTeacher, id} : null;
     }

@@ -1,18 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const lms_js_1 = require("./lms.js");
+const lms_js_2 = require("./lms.js");
 const pupils_js_1 = require("./pupils.js");
 const teacher_js_1 = require("./teacher.js");
 const groups_js_1 = require("./groups.js");
 const gradebooks_js_1 = require("./gradebooks.js");
-// const history = new Subject({
-//     title: 'History',
-//     lessons: 24
-// });
-// const math = new Subject({
-//   title: 'Math',
-//   lessons: 24
-// });
+const history = new lms_js_1.Subject({
+    title: 'History',
+    lessons: 24
+});
+const math = new lms_js_1.Subject({
+    title: 'Math',
+    lessons: 24
+});
 const pupil_1 = {
     "name": {
         "first": "Lana",
@@ -95,11 +96,11 @@ const teacher2 = {
     ],
     // "description": "",
 };
-const lms = new lms_js_1.LMS();
-// lms.add(history);
-// lms.add(math);
-// console.log(lms.verify(history));
-// console.log(lms.readAll());
+const lms = new lms_js_2.LMS();
+lms.add(history);
+lms.add(math);
+console.log(lms.verify(history));
+console.log(lms.readAll());
 const pupils = new pupils_js_1.Pupils();
 const pupil1 = pupils.add(pupil_1);
 const pupil2 = pupils.add(pupil_2);
@@ -116,21 +117,21 @@ groups.update('0', {
 const gradebooks = new gradebooks_js_1.GradeBooks(groups.readAll(), teachers.readAll(), lms.readAll());
 const gradeBooksId = gradebooks.add('0');
 console.log(gradeBooksId);
-// const record_1 = {
-//   pupilId: '0',
-//   teacherId: '0',
-//   subjectId: history.id,
-//   lesson: 1,
-//   mark: 9
-// };
-// const record_2 = {
-//   pupilId: '1',
-//   teacherId: '2',
-//   subjectId: math.id,
-//   lesson: 1,
-//   mark: 9
-// };
-// gradebooks.addRecord(gradeBooksId, record_1);
-// gradebooks.addRecord(gradeBooksId, record_2);
-// console.log(gradebooks.read(gradeBooksId, pupil1));
-// console.log(gradebooks.readAll(gradeBooksId));
+const record_1 = {
+    pupilId: '0',
+    teacherId: '0',
+    subjectId: history.id,
+    lesson: 1,
+    mark: 9
+};
+const record_2 = {
+    pupilId: '1',
+    teacherId: '2',
+    subjectId: math.id,
+    lesson: 1,
+    mark: 9
+};
+gradebooks.addRecord(gradeBooksId, record_1);
+gradebooks.addRecord(gradeBooksId, record_2);
+console.log(gradebooks.read(gradeBooksId, pupil1));
+console.log(gradebooks.readAll(gradeBooksId));

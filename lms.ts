@@ -1,9 +1,9 @@
-interface SubjectInt{
-    id?: string,
-    title: string,
-    lessons: number,
-    description?: string,
-}
+// interface SubjectInt{
+//     id?: string,
+//     title: string,
+//     lessons: number,
+//     description?: string,
+// }
 
 export class Subject {
     tittle: string;
@@ -27,16 +27,16 @@ export class Subject {
 export class LMS {
     private lms = new Map();
 
-    public add(data: SubjectInt): void{
+    public add(data: Subject): void{
         this.lms.set(data.id, data);
     }
-    public remove(data: SubjectInt):  void{
+    public remove(data: Subject):  void{
         if(!this.lms.has(data.id)){
             throw new Error('')
         }
         this.lms.delete(data.id);
     }
-    public verify(data: SubjectInt): boolean{
+    public verify(data: Subject): boolean{
         if(!this.lms.has(data.id)){
             return false;
         }
@@ -55,4 +55,5 @@ const history = new Subject({
 console.log(history);
 
 const lms = new LMS();
-// lms.add(history);
+lms.add(history);
+

@@ -1,7 +1,7 @@
 interface RecordInt  {
   pupilId: string,
   teacherId: string,
-  subjectId: string,
+  subjectId: object,
   lesson: number,
   mark: number
 };
@@ -64,7 +64,7 @@ export class GradeBooks {
         return pupilName;
     }
 
-    public read(gradeBookId: string, pupilId: string): object{
+    public read(gradeBookId: string, pupilId: object): object{
         if(!this.gradebook.has(gradeBookId)){
             throw new Error('');
         }
