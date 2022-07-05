@@ -20,7 +20,7 @@ export class Subject {
         this.subjectId = id;
         return {id, ...data}
     }
-    public id(): string{
+    public get id(): string{
         return this.subjectId;
     }
 }

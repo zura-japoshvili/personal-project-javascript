@@ -18,7 +18,7 @@ class Subject {
         this.subjectId = id;
         return Object.assign({ id }, data);
     }
-    id() {
+    get id() {
         return this.subjectId;
     }
 }
