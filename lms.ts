@@ -1,15 +1,24 @@
 interface SubjectInt{
+    id?: string,
     title: string,
     lessons: number,
     description?: string,
-    id?: string 
 }
 
 export class Subject {
+    tittle: string;
+    lessons: number;
+    description?: string;
     private subjectId: string;
-    constructor(subject: SubjectInt){
-        const id = String(Math.floor(Math.random() * 100000));
+    constructor(data){
+        this.tittle = data.title;
+        this.lessons - data.lessons;
+        if(data.description){
+            this.description = data.description;
+        }
+        const id: string = Math.floor(Math.random() * Date.now()).toString();
         this.subjectId = id;
+        return {id, ...data}
     }
     public id(): string{
         return this.subjectId;
@@ -17,23 +26,8 @@ export class Subject {
 }
 export class LMS {
     private lms = new Map();
-    private validateSub(subject){
-        if(Object.keys(subject).length < 2 || Object.keys(subject).length > 3){
-            throw new Error('1');
-        }
-        if(!subject.hasOwnProperty("title") || typeof subject.title !== 'string'){
-            throw new Error("2");
-        }
-        if(!subject.hasOwnProperty("lessons") || typeof subject.lessons !== 'number'){
-            throw new Error("3");
-        }
-        if(subject.hasOwnProperty("description") && typeof subject.description !== 'string'){
-            throw new Error("4");
-        }
-    }
 
     public add(data: SubjectInt): void{
-        this.validateSub(data)
         this.lms.set(data.id, data);
     }
     public remove(data: SubjectInt):  void{
@@ -55,10 +49,10 @@ export class LMS {
 }
 
 const history = new Subject({
-    title: 'History',
+    title: "History",
     lessons: 24
 });
 console.log(history);
 
 const lms = new LMS();
-lms.add(history);
+// lms.add(history);

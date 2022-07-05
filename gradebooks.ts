@@ -1,32 +1,23 @@
+interface RecordInt  {
+  pupilId: string,
+  teacherId: string,
+  subjectId: string,
+  lesson: number,
+  mark: number
+};
+
 export class GradeBooks {
-    #counter = 0;
-    #gradebook = new Map();
+    private counter = 0;
+    private gradebook = new Map();
+    private groups;
+    private teachers;
+    private lms;
     constructor(groups, teachers, lms){
         this.groups = groups;
         this.teachers = teachers;
         this.lms = lms;
     }
-    #validateRecord(record){
-        if(Object.keys(record).length !== 5){
-            throw new Error("");
-        }
-        if(!record.hasOwnProperty('pupilId')){
-            throw new Error('');
-        }
-        if(!record.hasOwnProperty('teacherId')){
-            throw new Error('');
-        }
-        if(!record.hasOwnProperty('subjectId')){
-            throw new Error('');
-        }
-        if(!record.hasOwnProperty('lesson')){
-            throw new Error('');
-        }
-        if(!record.hasOwnProperty('mark')|| record.mark < 1 || record.mark > 10){
-            throw new Error('');
-        }
-    }
-    add(groupId){
+    public add(groupId: string): string{
         let checker = false;
         this.groups.forEach(group => {
             if(group.id === groupId){
@@ -35,19 +26,18 @@ export class GradeBooks {
         });
         if(!checker) throw new Error("");
         const id = String(this.counter++);
-        this.#gradebook.set(id, []);
+        this.gradebook.set(id, []);
         return id;
     }
-    addRecord(gradeBookId, record){
-        this.#validateRecord(record);
-        if(!this.#gradebook.has(gradeBookId)){
+    public addRecord(gradeBookId: string, record: RecordInt){
+        if(!this.gradebook.has(gradeBookId)){
             throw new Error('');
         }
-        let data = this.#gradebook.get(gradeBookId);
+        let data = this.gradebook.get(gradeBookId);
         data.push(record);
     }
 
-    #getRecord(data){
+    private getRecord(data){
         let teacherName = this.teachers[data.teacherId].name.first + " " + this.teachers[data.teacherId].name.last;
         let subjectName = '';
         this.lms.forEach(value => {
@@ -62,7 +52,7 @@ export class GradeBooks {
             mark: data.mark
         }
     }
-    #getName(data){
+    private getName(data){
         let pupilName = '';
         this.groups.forEach(value => {
             value.pupils.forEach(pupil => {
@@ -74,20 +64,20 @@ export class GradeBooks {
         return pupilName;
     }
 
-    read(gradeBookId, pupilId){
-        if(!this.#gradebook.has(gradeBookId)){
+    public read(gradeBookId: string, pupilId: string): object{
+        if(!this.gradebook.has(gradeBookId)){
             throw new Error('');
         }
-        const data = this.#gradebook.get(gradeBookId);
+        const data = this.gradebook.get(gradeBookId);
         let pupilName = '';
 
         let pupilArr = [];
         data.forEach(value => {
             if(value.pupilId === pupilId){
-                pupilArr.push(this.#getRecord(value));
+                pupilArr.push(this.getRecord(value));
             }
             if(!pupilName){
-                pupilName = this.#getName(value);
+                pupilName = this.getName(value);
             }
         })
         return {
@@ -95,15 +85,15 @@ export class GradeBooks {
             record: pupilArr
         }
     }
-    readAll(gradeBookId){
-        if(!this.#gradebook.has(gradeBookId)){
+    readAll(gradeBookId: string){
+        if(!this.gradebook.has(gradeBookId)){
             throw new Error('');
         }
-        const data = this.#gradebook.get(gradeBookId);
+        const data = this.gradebook.get(gradeBookId);
 
         return [...data];
     }
-    clear(){
-        this.#gradebook.clear();
+    clear(): void{
+        this.gradebook.clear();
     }
 }

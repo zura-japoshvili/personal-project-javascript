@@ -102,5 +102,6 @@ const pupil_1 = {
 const pupils = new Pupils();
 const pupil1 = pupils.add(pupil_1);
 console.log(pupils.read('0'));
+pupils.remove('0');
 
 const pupil2 = pupils.add(pupil_2);

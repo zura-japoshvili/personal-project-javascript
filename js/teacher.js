@@ -1,20 +1,12 @@
-export class Teachers {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Teachers = void 0;
+class Teachers {
     constructor() {
         this.counter = 0;
         this.teacher = new Map();
     }
     validateTeacher(data) {
-        if (!data.hasOwnProperty("name")) {
-            throw new Error("");
-        }
-        else {
-            if (!data.name.hasOwnProperty("first") || typeof data.name.first !== "string") {
-                throw new TypeError("");
-            }
-            if (!data.name.hasOwnProperty("last") || typeof data.name.last !== "string") {
-                throw new TypeError("");
-            }
-        }
         if (!data.hasOwnProperty("dateOfBirth")) {
             throw new TypeError("");
         }
@@ -31,12 +23,6 @@ export class Teachers {
         else {
             data.phones.forEach(phones => {
                 let count = 0;
-                if (!phones.phone || typeof phones.phone !== 'string') {
-                    throw new TypeError("");
-                }
-                if (!phones.primary || typeof phones.primary !== 'boolean') {
-                    throw new TypeError("");
-                }
                 if (phones.primary === true) {
                     count++;
                 }
@@ -51,12 +37,6 @@ export class Teachers {
         else {
             data.emails.forEach(emails => {
                 let count = 0;
-                if (!emails.email || typeof emails.email !== 'string') {
-                    throw new TypeError("");
-                }
-                if (!emails.primary || typeof emails.primary !== 'boolean') {
-                    throw new TypeError("");
-                }
                 if (emails.primary === true) {
                     count++;
                 }
@@ -64,9 +44,6 @@ export class Teachers {
                     throw new Error("");
                 }
             });
-        }
-        if (!data.hasOwnProperty('sex') || typeof data.sex !== 'string') {
-            throw new TypeError('');
         }
         if (!data.hasOwnProperty('subjects')) {
             throw new Error('');
@@ -112,6 +89,7 @@ export class Teachers {
         return [...this.teacher.values()];
     }
 }
+exports.Teachers = Teachers;
 const teacher2 = {
     name: {
         first: "Shnana",

@@ -1,4 +1,7 @@
-export class Pupils {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Pupils = void 0;
+class Pupils {
     constructor() {
         this.counter = 0;
         this.pupils = new Map();
@@ -52,6 +55,7 @@ export class Pupils {
         this.pupils.delete(id);
     }
 }
+exports.Pupils = Pupils;
 const pupil_1 = {
     "name": {
         "first": "Lana",
@@ -85,4 +89,5 @@ const pupil_2 = {
 const pupils = new Pupils();
 const pupil1 = pupils.add(pupil_1);
 console.log(pupils.read('0'));
+pupils.remove('0');
 const pupil2 = pupils.add(pupil_2);
