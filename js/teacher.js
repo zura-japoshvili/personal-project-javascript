@@ -75,32 +75,3 @@ class Teachers {
     }
 }
 exports.Teachers = Teachers;
-const teacher2 = {
-    name: {
-        first: "Shnana",
-        last: "Shgvarishvili"
-    },
-    dateOfBirth: "02/02/1991",
-    emails: [
-        {
-            email: "ShnanaGvar@gmail.com",
-            primary: true
-        }
-    ],
-    phones: [
-        {
-            "phone": "568-68-68-68",
-            "primary": true
-        }
-    ],
-    sex: "Female",
-    subjects: [
-        {
-            subject: "Math" // just name property of subject.
-        }
-    ],
-    // description: "",
-};
-const teachers = new Teachers();
-const teacher_1_Id = teachers.add(teacher2);
-console.log(teachers.readAll());

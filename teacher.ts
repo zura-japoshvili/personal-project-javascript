@@ -63,18 +63,18 @@ export class Teachers{
             });
         }
     }
-    add(teacher: TeachersInt): string{
+    public add(teacher: TeachersInt): string{
         this.validateTeacher(teacher);
         const id = String(this.counter++);
         this.teacher.set(id, teacher);
         return id;
     }
 
-    read(id:string){
+    public read<T extends string>(id: T){
         const foundTeacher = this.teacher.get(id);
         return foundTeacher ? {...foundTeacher, id} : null;
     }
-    update(id: string, updateTeacher: TeachersInt){
+    public update(id: string, updateTeacher: TeachersInt){
         this.validateTeacher(updateTeacher);
         const foundTeacher = this.read(id);
         delete foundTeacher.id;
@@ -83,45 +83,15 @@ export class Teachers{
             ...updateTeacher
         });
     }
-    remove(id: string): void{
+    public remove(id: string): void{
         if(!this.teacher.has(id)){
             throw new Error('')
         }
         this.teacher.delete(id);
     }
-    readAll(): TeachersInt[]{
+    public readAll(): TeachersInt[]{
         if(arguments.length) throw new Error('argument was passed');
         return [...this.teacher.values()];
     }
 }
 
-const teacher2 = {
-    name: {
-        first: "Shnana",
-        last: "Shgvarishvili"
-    },
-    dateOfBirth: "02/02/1991", // format date
-    emails: [
-        {
-        email: "ShnanaGvar@gmail.com",
-        primary: true
-        }
-    ],
-    phones: [
-        {
-        "phone": "568-68-68-68",
-        "primary": true
-        }
-    ],
-    sex: "Female", // male or female
-    subjects: [
-        {
-        subject: "Math" // just name property of subject.
-        }
-    ],
-    // description: "",
-  }
-
-const teachers = new Teachers();
-const teacher_1_Id = teachers.add(teacher2);
-console.log(teachers.readAll());

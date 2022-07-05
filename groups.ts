@@ -54,7 +54,7 @@ export class Groups {
         const foundRoom = this.groups.get(id);
         return foundRoom ? {...foundRoom, id} : null;
     }
-    readAll(): object[]{
+    public readAll(): object[]{
         return [...this.groups.values()];
     }
 }

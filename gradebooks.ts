@@ -85,7 +85,7 @@ export class GradeBooks {
             record: pupilArr
         }
     }
-    readAll(gradeBookId: string): object[]{
+    public readAll(gradeBookId: string): object[]{
         if(!this.gradebook.has(gradeBookId)){
             throw new Error('');
         }
@@ -93,7 +93,7 @@ export class GradeBooks {
 
         return [...data];
     }
-    clear(): void{
+    public clear(): void{
         this.gradebook.clear();
     }
 }

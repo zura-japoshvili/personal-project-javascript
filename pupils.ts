@@ -46,7 +46,7 @@ export class Pupils{
         return {id, pupil};
     }
 
-    public read(id:string){
+    public read<T extends string>(id: T){
         const foundPupil = this.pupils.get(id);
         return foundPupil ? {id, ...foundPupil} : null;
     }
