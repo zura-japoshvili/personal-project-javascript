@@ -6,6 +6,10 @@ interface RecordInt  {
   mark: number
 };
 
+// subjectId: object, subjectId: string
+// აქ რა ლოგიკაა ვერ გავიგე
+// Type '() => string' is not assignable to type 'string'
+// ობიექტად რო ვაკეთებ მერე აღარ აგდებს ერორეს 
 export class GradeBooks {
     private counter = 0;
     private gradebook = new Map();

@@ -2,6 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GradeBooks = void 0;
 ;
+// subjectId: object, subjectId: string
+// აქ რა ლოგიკაა ვერ გავიგე
+// Type '() => string' is not assignable to type 'string'
+// ობიექტად რო ვაკეთებ მერე აღარ აგდებს ერორეს 
 class GradeBooks {
     constructor(groups, teachers, lms) {
         this.counter = 0;
