@@ -43,8 +43,6 @@ class LMS {
         return true;
     }
     readAll() {
-        if (arguments.length)
-            throw new Error('argument was passed');
         return [...this.lms.values()];
     }
 }

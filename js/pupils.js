@@ -56,38 +56,3 @@ class Pupils {
     }
 }
 exports.Pupils = Pupils;
-const pupil_1 = {
-    "name": {
-        "first": "Lana",
-        "last": "LanaGvari"
-    },
-    "dateOfBirth": "02/02/2002",
-    "phones": [
-        {
-            "phone": "568 20 20 20",
-            "primary": true
-        }
-    ],
-    "sex": "Female",
-    "description": ""
-};
-const pupil_2 = {
-    "name": {
-        "first": "ShLana",
-        "last": "ShLanaGvari"
-    },
-    "dateOfBirth": "02/02/2002",
-    "phones": [
-        {
-            "phone": "568 20 20 20",
-            "primary": true
-        }
-    ],
-    "sex": "Female",
-    "description": ""
-};
-const pupils = new Pupils();
-const pupil1 = pupils.add(pupil_1);
-console.log(pupils.read('0'));
-pupils.remove('0');
-const pupil2 = pupils.add(pupil_2);

@@ -42,8 +42,7 @@ export class LMS {
         }
         return true;
     }
-    public readAll(){
-        if(arguments.length) throw new Error('argument was passed');
+    public readAll(): object[]{
         return [...this.lms.values()];
     }
 }

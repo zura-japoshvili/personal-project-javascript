@@ -50,12 +50,11 @@ export class Groups {
             ...data
         });
     }
-    public read(id: string){
+    public read<T extends string>(id: T){
         const foundRoom = this.groups.get(id);
         return foundRoom ? {...foundRoom, id} : null;
     }
-    readAll(){
-        if(arguments.length) throw new Error('argument was passed')
+    readAll(): object[]{
         return [...this.groups.values()];
     }
 }

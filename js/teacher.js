@@ -45,19 +45,6 @@ class Teachers {
                 }
             });
         }
-        if (!data.hasOwnProperty('subjects')) {
-            throw new Error('');
-        }
-        else {
-            data.subjects.forEach(subjects => {
-                if (typeof subjects.subject !== 'string') {
-                    throw new TypeError('');
-                }
-            });
-        }
-        if (data.hasOwnProperty("description") && typeof data.description !== 'string') {
-            throw new TypeError("");
-        }
     }
     add(teacher) {
         this.validateTeacher(teacher);
@@ -66,8 +53,6 @@ class Teachers {
         return id;
     }
     read(id) {
-        if (typeof id !== 'string')
-            throw new Error('not a string');
         const foundTeacher = this.teacher.get(id);
         return foundTeacher ? Object.assign(Object.assign({}, foundTeacher), { id }) : null;
     }

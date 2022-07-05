@@ -85,7 +85,7 @@ export class GradeBooks {
             record: pupilArr
         }
     }
-    readAll(gradeBookId: string){
+    readAll(gradeBookId: string): object[]{
         if(!this.gradebook.has(gradeBookId)){
             throw new Error('');
         }

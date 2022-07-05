@@ -42,8 +42,6 @@ class Groups {
         return foundRoom ? Object.assign(Object.assign({}, foundRoom), { id }) : null;
     }
     readAll() {
-        if (arguments.length)
-            throw new Error('argument was passed');
         return [...this.groups.values()];
     }
 }
